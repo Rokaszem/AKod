@@ -5,10 +5,10 @@ public class site {
 		int h,i,j,k,b;
 		
 		//1-2 sor
-		for (h = 5; h > 3; h--) {
+		for (h = 7; h > 4; h--) {
 			for (i = 0; i < 7; i++) {
 				if(playerpos[h-1][i].equals("0")) {
-					System.out.print("[ ]");
+					System.out.print("["+playerpos[h-1][i]+"]");
 				}
 			}
 			System.out.println("");
@@ -17,26 +17,32 @@ public class site {
 		System.out.print("   ");
 		for (j = 0; j < 5; j++) {
 			if(playerpos[3][j].equals("0")) {
-				System.out.print("[ ]");
+				System.out.print("["+playerpos[3][j]+"]");
 			}
 		}
 		System.out.println();
 		//4-5 sor
-		for (k = 2; k > 0; k--) {
+		for (k = 3; k > 1; k--) {
 			System.out.print("      ");
 			for (b = 0; b < 3; b++) {
 				if(playerpos[k-1][b].equals("0")) {
-					System.out.print("[ ]");
+					System.out.print("["+playerpos[k-1][b]+"]");
 				}
 			}
 			System.out.println();
 		}
 		//6 sor
-		if(playerpos[5][3].equals("0")) {
+		if(playerpos[0][0].equals("0")) {
 			System.out.print("         [ ]");
-		}else if(playerpos[5][3].equals("Y")) {
-			System.out.print("         [Y]");
+		}else if(playerpos[0][0].equals("Y")) {
+			System.out.print("         ["+playerpos[0][0]+"]");
 		}
 
 	}
 }
+
+/*	if(playerpos[7][x].equals("Y")){
+ *		end 
+ *
+ * 	}
+*/

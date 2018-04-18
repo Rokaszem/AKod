@@ -6,14 +6,15 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String[][] playerps = new String[6][7];
+		String[][] playerps = new String[7][7];
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 7; i++) {
 			for (int k = 0; k < 7; k++) {
 				playerps[i][k] = "0";
 			}
 		}
-		playerps[5][3] = "Y";
+		
+		playerps[0][0] = "Y";
 		site.generateSite(playerps);
 		System.out.println();
 		System.out.println("---------------------");
@@ -36,13 +37,11 @@ public class Main {
 		for (i = 0; i < 3559; i++) {
 			ql[i] = new questionGiver(i, qs[i][0], qs[i][1], qs[i][2], qs[i][3], qs[i][4], qs[i][5]);
 		}
-
 		Scanner sc = new Scanner(System.in);
 		if (sc.hasNextLine()) {
 			ask(ql);
 
 		}
-
 		sc.close();
 	}
 
