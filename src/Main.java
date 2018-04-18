@@ -6,26 +6,28 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		int score=0;
-		String[][] playerps = new String[7][9];
-		//i a sor
-		int i=0;
-		//k az oszlop
-		int k=0;
-		for (i = 0; i < 7; i++) {
+		Scanner sc= new Scanner(System.in);
+		String asd = "asd";
+		int score = 0;
+		boolean end = false;
+		boolean helyese = false;
+		String[][] playerps = new String[9][9];
+		// i a sor
+		int i = 0;
+		// k az oszlop
+		int k = 0;
+		for (i = 0; i < 9; i++) {
 			for (k = 0; k < 9; k++) {
-				playerps[i][k] = i+""+k;
-				if(k==0||k==8||i==6) {
-					playerps[i][k]="X";
+				playerps[i][k] ="0";
+				if (k == 0 || k == 8 || i >= 6) {
+					playerps[i][k] = "X";
 				}
 			}
 		}
-		playerps[0][0] = "Y";
-		site.generateSite(playerps);
-		System.out.println();
-		System.out.println("---------------------");
+		playerps[0][4] = "Y";
 		System.out.println("Udvozollek a Kod nevu jatekban!");
 		System.out.println("Kezdeshez nyomj ENTER-t.");
+		System.out.println("---------------------");
 
 		String[][] qs = new String[3559][6];
 		Scanner scf = new Scanner(new File("kerdesekcsv.csv"));
@@ -42,28 +44,64 @@ public class Main {
 		for (i = 0; i < 3559; i++) {
 			ql[i] = new questionGiver(i, qs[i][0], qs[i][1], qs[i][2], qs[i][3], qs[i][4], qs[i][5]);
 		}
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		if (sc.hasNextLine()) {
-			ask(ql);
+			
+			
+			
+			while (end == false) {
+				site.generateSite(playerps);
+				System.out.println();
+				System.out.println();
+				if (ask(ql,sc)) {
+					int[] asds = new int[2];
+					asds = WhereAmI(playerps);
+					playerps = site.Lep(playerps, asds, sc);
+					System.out.println(asds[0] + " " + asds[1]);
+				} else {
+					break;
+				}
 
+			}
+			for (k = 1; k < 8; k++) {
+				if (playerps[6][k].equals("Y")) {
+					end = true;
+				}
+			}
+			
+			
+			
+			
 		}
 		sc.close();
 	}
 
-	public static void ask(questionGiver[] asd) {
+	public static boolean ask(questionGiver[] asd, Scanner sca) {
 		Random rand = new Random();
 		int n = rand.nextInt(3559);
 		System.out.println(asd[n].question);
 		System.out.println("1: " + asd[n].answer1 + "\n2: " + asd[n].answer2 + "\n3: " + asd[n].answer3 + "\n4: "
 				+ asd[n].answer4);
-		Scanner sca = new Scanner(System.in);
-		String chosen = sca.nextLine();
+		String chosen = sca.next();
 		if (chosen.equals(asd[n].realanswer)) {
-			System.out.println("Helyes valasz!");
+			System.out.println("jo");
+			return true;
 		} else {
-			System.out.println("Helytelen valasz!");
+			System.out.println("nem jo");
+			return false;
 		}
-		sca.close();
 	}
 
+	public static int[] WhereAmI(String[][] playerpos) {
+		int[] pos = new int[2];
+		for (int i = 0; i < playerpos.length; i++) {
+			for (int k = 0; k < playerpos[i].length; k++) {
+				if (playerpos[i][k].equals("Y")) {
+					pos[0] = i;
+					pos[1] = k;
+				}
+			}
+		}
+		return pos;
+	}
 }
