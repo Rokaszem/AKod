@@ -6,14 +6,20 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String[][] playerps = new String[7][7];
-
-		for (int i = 0; i < 7; i++) {
-			for (int k = 0; k < 7; k++) {
-				playerps[i][k] = "0";
+		int score=0;
+		String[][] playerps = new String[7][9];
+		//i a sor
+		int i=0;
+		//k az oszlop
+		int k=0;
+		for (i = 0; i < 7; i++) {
+			for (k = 0; k < 9; k++) {
+				playerps[i][k] = i+""+k;
+				if(k==0||k==8||i==6) {
+					playerps[i][k]="X";
+				}
 			}
 		}
-		
 		playerps[0][0] = "Y";
 		site.generateSite(playerps);
 		System.out.println();
@@ -26,7 +32,6 @@ public class Main {
 
 		scf.useDelimiter(";");
 		String helper;
-		int i = 0;
 		for (i = 0; i < 3559; i++) {
 			helper = scf.nextLine();
 			qs[i] = helper.split(";");
