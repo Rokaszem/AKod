@@ -19,9 +19,12 @@ public class Main {
 		for (i = 0; i < 9; i++) {
 			for (k = 0; k < 9; k++) {
 				playerps[i][k] ="0";
-				if (k == 0 || k == 8 || i >= 6) {
+				if (k == 0 || k == 8 || i == 6 || ((k==1 || k==7 ) && i<=3) || ((k==2 || k==6) && i<=2) || ((k==3 || k==5) && i==0) ) {
 					playerps[i][k] = "X";
 				}
+				//if(((k==1 || k==7 ) && i<=3) || ((k==2 || k==6) && i<=2) || ((k==3 || k==5) && i==0) ) {
+					
+				
 			}
 		}
 		playerps[0][4] = "Y";
@@ -54,10 +57,9 @@ public class Main {
 				System.out.println();
 				System.out.println();
 				if (ask(ql,sc)) {
-					int[] asds = new int[2];
-					asds = WhereAmI(playerps);
-					playerps = site.Lep(playerps, asds, sc);
-					System.out.println(asds[0] + " " + asds[1]);
+					int[] pos = new int[2];
+					pos = WhereAmI(playerps);
+					while(!site.Lep(playerps, pos, sc));
 				} else {
 					break;
 				}
@@ -84,10 +86,10 @@ public class Main {
 				+ asd[n].answer4);
 		String chosen = sca.next();
 		if (chosen.equals(asd[n].realanswer)) {
-			System.out.println("jo");
+			System.out.println("Helyes válasz! Merre szeretne továbbhaladni?");
 			return true;
 		} else {
-			System.out.println("nem jo");
+			System.out.println("Helytelen válasz! Merre szeretne továbbhaladni?");
 			return false;
 		}
 	}
