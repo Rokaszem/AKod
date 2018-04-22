@@ -1,6 +1,16 @@
 import java.util.Scanner;
-
+/**
+ * 
+ * @author Toth Istvan
+ * 
+ * @version 1.0
+ *
+ */
 public class site {
+	/**
+	 * 
+	 * @param playerpos A jatekter mezoinek tartalma
+	 */
 	public static void generateSite(String[][] playerpos) {
 
 		int h, i, j, k, b;
@@ -20,13 +30,6 @@ public class site {
 					cella="[Y]";
 					break;
 				}
-				/*if(playerpos[h-1][i].equals("0")) {
-					cella="[ ]";
-				}else if(playerpos[h-1][i].equals("X")) {
-					cella="[X]";
-				}else if(playerpos[h-1][i].equals("Y")) {
-					cella="[Y]";
-				}*/
 				System.out.print(cella);
 			}
 			System.out.println("");
@@ -45,13 +48,6 @@ public class site {
 				cella="[Y]";
 				break;
 			}
-			/*if(playerpos[3][j].equals("0")) {
-				cella="[ ]";
-			}else if(playerpos[3][j].equals("X")) {
-				cella="[X]";
-			}else if(playerpos[3][j].equals("Y")) {
-				cella="[Y]";
-			}*/
 			System.out.print(cella);
 		}
 		System.out.println();
@@ -70,13 +66,6 @@ public class site {
 					cella="[Y]";
 					break;
 				}
-				/*if(playerpos[k-1][b].equals("0")) {
-					cella="[ ]";
-				}else if(playerpos[k-1][b].equals("X")) {
-					cella="[X]";
-				}else if(playerpos[k-1][b].equals("Y")) {
-					cella="[Y]";
-				}*/
 				System.out.print(cella);
 			}
 			System.out.println();
@@ -85,7 +74,13 @@ public class site {
 		System.out.print("         [" + playerpos[0][4] + "]");
 
 	}
-
+/**
+ * 
+ * @param playerps A jatekter mezoinek tartalma
+ * @param pos A jatekos pozicioja
+ * @param sca A scanner, amivel beolvasunk
+ * @return Sikeres volt-e a lepes
+ */
 	public static boolean Lep(String[][] playerps, int[] pos, Scanner sca) {
 		String irany = sca.next();
 		boolean lepette=false;

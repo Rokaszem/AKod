@@ -3,12 +3,18 @@ import java.io.FileNotFoundException;
 import java.text.*;
 import java.util.*;
 
+/**
+ * 
+ * @author Toth Istvan
+ * 
+ * @version 1.0
+ *
+ */
 
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner sc = new Scanner(System.in);
-		String asd = "asd";
 		double score = 0;
 		String[][] playerps = new String[9][9];
 		ArrayList<String> kodlista=new ArrayList<String>();
@@ -33,10 +39,14 @@ public class Main {
 		System.out.println("Udvozollek a Kod nevu jatekban!");
 		System.out.println("Kezdeshez nyomj ENTER-t.");
 		System.out.println("---------------------");
-
+		
 		String[][] qs = new String[3559][6];
-		Scanner scf = new Scanner(new File("kerdesekcsv.csv"));
+		
+		
 
+		Scanner scf = new Scanner(new File("kerdesekcsv.csv"));
+		
+		
 		scf.useDelimiter(";");
 		String helper;
 		for (i = 0; i < 3559; i++) {
@@ -84,21 +94,25 @@ public class Main {
 						playerps[6][k]="0";
 					}
 				}
-				System.out.println("Pontszám: " + df.format(score)+" Érintett mezõk: "+lepesekszama+" Kódlista.size:"+kodlista.size());
+				System.out.println("Pontszám: " + df.format(score)+" Érintett mezõk: "+lepesekszama);
 			}
 
 		}
 		sc.close();
 	}
-
+/**
+ * 
+ * @param asd A kerdesek taroloja
+ * @param sca A scanner, amivel beolvasunk
+ * @param kodlista A szavak listaja, amit a vegjatekban kell a jatekosnak leirnia
+ * @return A kerdesre adott valasz helyes-e
+ */
 	private static boolean ask(questionGiver[] asd, Scanner sca,ArrayList<String> kodlista) {
 		Random rand = new Random();
 		int n = rand.nextInt(3559);
-		System.out.println(asd[n].question);
-		System.out.println("1: " + asd[n].answer1 + "\n2: " + asd[n].answer2 + "\n3: " + asd[n].answer3 + "\n4: "
-				+ asd[n].answer4);
+		System.out.println(asd[n]);
 		String chosen=sca.next();
-		if (chosen.equals(asd[n].realanswer)) {
+		if (chosen.equals(asd[n].getRealanswer())) {
 			switch (asd[n].realanswer) {
 			case "1":
 				kodlista.add(asd[n].answer1);
@@ -124,7 +138,11 @@ public class Main {
 			return false;
 		}
 	}
-
+/**
+ * 
+ * @param playerpos A jatekter mezoinek tartalma
+ * @return A jatekos poziciojanak x, y koordinataja
+ */
 	private static int[] WhereAmI(String[][] playerpos) {
 		int[] pos = new int[2];
 		for (int i = 0; i < playerpos.length; i++) {
@@ -137,7 +155,12 @@ public class Main {
 		}
 		return pos;
 	}
-
+/**
+ * 
+ * @param score A jatekos eddig elert pontszama
+ * @param pos A jatekos pozicioja
+ * @return Az adott mezo sikeres teljesitese utani uj pontszama
+ */
 	private static double pontozas(double score, int[] pos) {
 		switch (pos[0]) {
 		case 0:
@@ -161,7 +184,12 @@ public class Main {
 		}
 		return score;
 	}
-	
+	/**
+	 * 
+	 * @param playerpos A jatekter mezoinek tartalma
+	 * @param pos A jatekos pozicioja
+	 * @return Elakadt-e a jatekos
+	 */
 	private static boolean elakadte(String[][] playerpos,int[] pos) {
 		if(playerpos[pos[0]+1][pos[1]].equals("X")  &&
 				playerpos[pos[0]][pos[1]+1].equals("X") && 
@@ -170,11 +198,24 @@ public class Main {
 		}
 		return false;
 	}
+	/**
+	 * 
+	 * @param playerpos A jatekter mezoinek tartalma
+	 * @param pos A jatekos pozicioja
+	 * @return A jatekost 1 egyseggel feljebb helyezi az y tengelyen
+	 */
 	private static String[][] lokes(String[][] playerpos,int[] pos) {
 		playerpos[pos[0]+1][pos[1]]="Y";
 		playerpos[pos[0]][pos[1]]="X";
 		return playerpos;
 	}
+	/**
+	 * 
+	 * @param score A jatekos eddig elert pontszama
+	 * @param sca A scanner, amivel beolvasunk
+	 * @param kodlista A szavak listaja, amit a vegjatekban kell a jatekosnak leirnia
+	 * @return A jatekos vegleges pontszama
+	 */
 	private static double vegjatek(double score,Scanner sca,ArrayList<String> kodlista) {
 		Random rand = new Random();
 		int h=0;
